@@ -9,6 +9,8 @@ import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 
 const Discover = () => {
 	const dispatch = useDispatch();
+
+	// Slice of the state
 	const { activeSong, isPlaying } = useSelector((state) => state.player);
 
 	// Fetch charts data
@@ -17,6 +19,7 @@ const Discover = () => {
 	// TODO: Dynamic change of the current genre
 	const genreTitle = "Pop";
 
+	// Fallback components
 	if (isFetching) return <Loader title="Loading songs" />;
 	if (error) return <Error title="Error connecting to the server" />;
 
