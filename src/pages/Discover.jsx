@@ -12,10 +12,8 @@ const Discover = () => {
 	// TODO: Dynamic change of the current genre
 	const genreTitle = "Pop";
 
-	// TODO: Make Loader component
-	if (isFetching) return <Loader title="Loading songs 🎶" />;
-	// TODO: Make Error component
-	if (error) return <Error />;
+	if (isFetching) return <Loader title="Loading songs" />;
+	if (error) return <Error title="Error connecting to the server" />;
 
 	return (
 		<div className="flex flex-col">
