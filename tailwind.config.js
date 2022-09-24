@@ -3,7 +3,12 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				black: '#191624',
+				black: '#0d1615',
+				my: {
+					darkgreen: '#005248',
+					cream: '#ffedcb',
+					yellow: '#f0ac23',
+				},
 			},
 			animation: {
 				slideup: 'slideup 1s ease-in-out',
