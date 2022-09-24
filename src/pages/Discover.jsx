@@ -27,7 +27,6 @@ const Discover = () => {
 			<div className="flex flex-wrap sm:justify-start justify-center gap-8">
 				{
 					data?.map((song, i) => (
-						// TODO: Make SongCard component
 						<SongCard key={song.key} song={song} i={i}></SongCard>
 					))
 				}
@@ -37,3 +36,4 @@ const Discover = () => {
 };
 
 export default Discover;
+
