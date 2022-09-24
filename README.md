@@ -1,5 +1,6 @@
 # Mussik
 
+### **⚠️ Currently under development! ⚠️**
 An elegant responsive music application.
 Main technologies: [React.js](https://reactjs.org/), [Tailwindcss](https://tailwindcss.com/), [RapidAPI](https://rapidapi.com/), [Redux](https://redux.js.org/)
 
