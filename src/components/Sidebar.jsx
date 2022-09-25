@@ -32,11 +32,21 @@ const Sidebar = () => {
 				<NavLinks />
 			</div>
 
-			<div className="absolute md:hidden block right-0 z-50 text-my-cream hover:text-my-yellow cursor-pointer transition-all">
-				{mobileMenuOpen ? (
-					<RiCloseLine className="p-2 w-12 h-12" onClick={() => setMobileMenuOpen(false)} />
-				) : <HiOutlineMenu className="p-2 w-12 h-12" onClick={() => setMobileMenuOpen(true)} />
-				}
+
+			<div className="absolute right-0 w-1/3 h-screen">
+				<div className="absolute md:hidden block right-0 z-50 text-my-cream hover:text-my-yellow cursor-pointer transition-all">
+					{mobileMenuOpen ? (
+						<RiCloseLine className="p-2 w-12 h-12" onClick={() => setMobileMenuOpen(false)} />
+					) : <HiOutlineMenu className="p-2 w-12 h-12" onClick={() => setMobileMenuOpen(true)} />
+					}
+				</div>
+				{mobileMenuOpen && (
+					<div
+						className="absolute md:hidden flex right-0 w-full h-screen z-40 justify-center items-center bg-black/10 backdrop-blur-lg text-lg text-my-cream smooth-transition opacity-0 hover:opacity-100 cursor-pointer" onClick={() => setMobileMenuOpen(false)}
+					>
+						<p>Close</p>
+					</div>
+				)}
 			</div>
 
 			<div
