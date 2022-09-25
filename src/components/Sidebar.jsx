@@ -40,7 +40,7 @@ const Sidebar = () => {
 			</div>
 
 			<div
-				className={`absolute md:hidden p-6 top-0 w-2/3 h-screen z-50 bg-gradient-to-r from-my-darkgreen to-white/10 backdrop-blur-lg z-10 smooth-transition ${mobileMenuOpen ? "left-0" : "-left-full"}`}
+				className={`absolute md:hidden p-6 top-0 w-2/3 h-screen z-50 bg-gradient-to-r from-my-darkgreen to-white/10 backdrop-blur-lg smooth-transition ${mobileMenuOpen ? "left-0" : "-left-full"}`}
 			>
 				<img className="w-full h-24 object-contain" src={logo} alt="logo" />
 				<NavLinks handleClick={() => setMobileMenuOpen(false)} />
