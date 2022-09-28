@@ -24,10 +24,10 @@ const TopChartCard = ({ song, data, i }) => {
 	}
 
 	return (
-		<div className="mb-2 p-2 w-full flex flex-row items-center gap-2 rounded-lg hover:bg-black/50 cursor-pointer">
-			<p>{i + 1}.</p>
+		<div className="mb-2 p-2 w-full flex flex-row items-center gap-3 rounded-lg hover:bg-black/50 cursor-pointer">
+			<p className="font-bold">{i + 1}.</p>
 			<Link className="w-16 h-fit" to={`/songs/${song?.key}`}>
-				<img src={song.images?.coverart} alt="Song coverart" />
+				<img className="rounded-lg" src={song.images?.coverart} alt="Song coverart" />
 			</Link>
 			<div className="flex flex-col">
 				<Link className="font-semibold truncate hover:text-my-yellow transition-all" to={`/songs/${song?.key}`}>{song.title}</Link>
@@ -58,6 +58,7 @@ const TopPlay = () => {
 		<div className="ml-0 xl:ml-6 mb-6 xl:mb-0 max-w-full xl:max-w-[500px] flex flex-1 flex-col" ref={divRef}>
 			<div className="w-full flex flex-col">
 				<Link className="w-fit text-2xl font-bold hover:text-my-yellow cursor-pointer transition-all" to="/top-charts">Top charts</Link>
+
 				<div className="mt-4 flex flex-col gap-1">
 					{topSongs?.map((song, i) => (
 						<TopChartCard
@@ -68,6 +69,31 @@ const TopPlay = () => {
 						/>
 					))}
 				</div>
+			</div>
+			<div className="mt-4 w-full flex flex-col">
+				<Link className="w-fit text-2xl font-bold hover:text-my-yellow cursor-pointer transition-all" to="/top-artists">Top artists</Link>
+
+				<Swiper
+					className="mt-4"
+					slidesPerView="auto"
+					spaceBetween={15}
+					centeredSlides
+					centeredSlidesBounds
+					freeMode
+					modules={[FreeMode]}
+				>
+					{topSongs?.map((song, i) => (
+						<SwiperSlide
+							className="shadow-lg rounded-full animate-slideright"
+							style={{ width: "25%", height: "auto" }}
+							key={song?.key}
+						>
+							<Link to={`/artists/${song?.artists[0]?.adamid}`}>
+								<img className="w-full rounded-full object-cover" src={song?.images.background} alt="Author's image" />
+							</Link>
+						</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
 		</div>
 	);
