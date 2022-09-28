@@ -11,16 +11,41 @@ import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 
-const TopChartCard = ({ song }) => (
-	<div className="mb-2 px-4 py-2 w-full flex flex-row items-center rounded-lg hover:bg-black/50 cursor-pointer">
-		<div>
-			<p className="font-bold">{song?.title}</p>
-			<p>{song?.subtitle}</p>
-		</div>
-	</div>
-);
-const TopPlay = () => {
+const TopChartCard = ({ song, data, i }) => {
 	const dispatch = useDispatch();
+	const { activeSong, isPlaying } = useSelector((state) => state.player);
+
+	const handlePauseClick = () => {
+		dispatch(playPause(false));
+	}
+	const handlePlayClick = () => {
+		dispatch(setActiveSong({ song, data, i }));
+		dispatch(playPause(true));
+	}
+
+	return (
+		<div className="mb-2 p-2 w-full flex flex-row items-center gap-2 rounded-lg hover:bg-black/50 cursor-pointer">
+			<p>{i + 1}.</p>
+			<Link className="w-16 h-fit" to={`/songs/${song?.key}`}>
+				<img src={song.images?.coverart} alt="Song coverart" />
+			</Link>
+			<div className="flex flex-col">
+				<Link className="font-semibold truncate hover:text-my-yellow transition-all" to={`/songs/${song?.key}`}>{song.title}</Link>
+				<Link className="text-sm truncate hover:text-my-yellow transition-all" to={song.artists ? `/artists/${song?.artists[0]?.adamid}` : "/top-artists"}>{song.subtitle}</Link>
+			</div>
+			<div className="ml-auto">
+				<PlayPause
+					song={song}
+					activeSong={activeSong}
+					isPlaying={isPlaying}
+					handlePause={handlePauseClick}
+					handlePlay={handlePlayClick}
+				/>
+			</div>
+		</div>
+	)
+};
+const TopPlay = () => {
 	const { data } = useGetTopChartsQuery();
 	const divRef = useRef(null);
 	const topSongs = data?.slice(0, 5);
@@ -32,16 +57,14 @@ const TopPlay = () => {
 	return (
 		<div className="ml-0 xl:ml-6 mb-6 xl:mb-0 max-w-full xl:max-w-[500px] flex flex-1 flex-col" ref={divRef}>
 			<div className="w-full flex flex-col">
-				<div className="flex flex-row justify-between items-center">
-					<Link to="/top-charts">
-						<h2 className="text-2xl font-bold hover:text-my-yellow cursor-pointer transition-all">Top charts</h2>
-					</Link>
-				</div>
+				<Link className="w-fit text-2xl font-bold hover:text-my-yellow cursor-pointer transition-all" to="/top-charts">Top charts</Link>
 				<div className="mt-4 flex flex-col gap-1">
-					{topSongs?.map((song) => (
+					{topSongs?.map((song, i) => (
 						<TopChartCard
 							key={song.key}
 							song={song}
+							data={data}
+							i={i}
 						/>
 					))}
 				</div>
