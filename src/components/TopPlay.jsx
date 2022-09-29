@@ -55,7 +55,7 @@ const TopPlay = () => {
 	});
 
 	return (
-		<div className="ml-0 xl:ml-6 mb-6 xl:mb-0 max-w-full xl:max-w-[500px] flex flex-1 flex-col" ref={divRef}>
+		<div className="ml-0 xl:ml-6 mb-6 xl:mb-0 max-w-full xl:max-w-[400px] flex flex-1 flex-col" ref={divRef}>
 			<div className="w-full flex flex-col">
 				<Link className="w-fit text-2xl font-bold hover:text-my-yellow cursor-pointer transition-all" to="/top-charts">Top charts</Link>
 
