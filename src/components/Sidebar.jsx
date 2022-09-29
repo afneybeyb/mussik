@@ -27,11 +27,10 @@ const Sidebar = () => {
 
 	return (
 		<>
-			<div className="md:flex hidden px-4 py-8 w-[240px] flex-col bg-black">
+			<div className="md:flex hidden px-4 py-8 w-[200px] xl:w-[250px] flex-col bg-black transition-all">
 				<img className="w-full h-24 object-contain" src={logo} alt="logo" />
 				<NavLinks />
 			</div>
-
 
 			<div className="absolute right-0 w-1/3 h-screen">
 				<div className="absolute md:hidden block right-0 z-50 text-my-cream hover:text-my-yellow cursor-pointer transition-all">
