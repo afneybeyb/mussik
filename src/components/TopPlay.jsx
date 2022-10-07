@@ -24,7 +24,7 @@ const TopChartCard = ({ song, data, i }) => {
 	}
 
 	return (
-		<div className="mb-2 p-2 w-full flex flex-row items-center gap-3 rounded-lg hover:bg-black/50 cursor-pointer">
+		<div className="mb-2 p-2 w-full flex flex-row items-center gap-3 rounded-lg hover:bg-black/50">
 			<p className="font-bold">{i + 1}.</p>
 			<Link className="w-16 h-fit" to={`/songs/${song?.key}`}>
 				<img className="rounded-lg" src={song.images?.coverart} alt="Song coverart" />
