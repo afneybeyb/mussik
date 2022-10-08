@@ -1,20 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import PlayPause from './PlayPause';
-import { playPause, setActiveSong } from '../redux/features/playerSlice';
 
-const SongCard = ({ song, activeSong, isPlaying, data, i }) => {
-	// Getting Redux state hooks
-	const dispatch = useDispatch();
-
-	const handlePauseClick = () => {
-		dispatch(playPause(false));
-	}
-	const handlePlayClick = () => {
-		dispatch(setActiveSong({ song, data, i }));
-		dispatch(playPause(true));
-	}
+const SongCard = ({ song, data, activeSong }) => {
 
 	return (
 		<div className="p-4 w-[250px] flex flex-col bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
@@ -22,10 +10,7 @@ const SongCard = ({ song, activeSong, isPlaying, data, i }) => {
 				<div className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex ${activeSong?.title === song.title ? "flex bg-black bg-opacity-50" : "hidden"}`}>
 					<PlayPause
 						song={song}
-						activeSong={activeSong}
-						isPlaying={isPlaying}
-						handlePause={handlePauseClick}
-						handlePlay={handlePlayClick}
+						data={data}
 					/>
 				</div>
 				<img src={song.images?.coverart} alt="Song coverart" />
