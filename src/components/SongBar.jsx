@@ -1,46 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import PlayPause from './PlayPause';
 
-const SongBar = ({ song, i, artistId, isPlaying, activeSong, handlePauseClick, handlePlayClick }) => (
-  <div className={`w-full flex flex-row items-center hover:bg-[#4c426e] ${activeSong?.title === song?.title ? 'bg-[#4c426e]' : 'bg-transparent'} py-2 p-4 rounded-lg cursor-pointer mb-2`}>
-    <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
-    <div className="flex-1 flex flex-row justify-between items-center">
-      <img
-        className="w-20 h-20 rounded-lg"
-        src={artistId ? song?.attributes?.artwork?.url.replace('{w}', '125').replace('{h}', '125') : song?.images?.coverart}
-        alt={song?.title}
-      />
-      <div className="flex-1 flex flex-col justify-center mx-3">
-        {!artistId ? (
-          <Link to={`/songs/${song.key}`}>
-            <p className="text-xl font-bold text-white">
-              {song?.title}
-            </p>
-          </Link>
-        ) : (
-          <p className="text-xl font-bold text-white">
-            {song?.attributes?.name}
-          </p>
-        )}
-        <p className="text-base text-gray-300 mt-1">
-          {artistId ? song?.attributes?.albumName : song?.subtitle}
-        </p>
-      </div>
-    </div>
-    {!artistId
-      ? (
-        <PlayPause
-          isPlaying={isPlaying}
-          activeSong={activeSong}
-          song={song}
-          handlePause={handlePauseClick}
-          handlePlay={() => handlePlayClick(song, i)}
-        />
-      )
-      : null}
-  </div>
-);
+const SongBar = ({ song, data, i, artistId }) => {
+	const { activeSong } = useSelector((state) => state.player);
+
+	return (
+		<div className={`mb-2 p-2 w-full flex flex-row items-center gap-3 rounded-lg hover:bg-black/50 ${activeSong?.title === song.title ? "bg-black/50" : "bg-transparent"}`}>
+			<h3 className="font-bold">{i + 1}.</h3>
+
+			<div className="flex flex-1 flex-row justify-between items-center gap-3 cursor-default" to={`/songs/${song?.key}`}>
+				<Link to={`/songs/${song?.key}`}>
+					<img className="w-[4em] h-fit rounded-lg" src={artistId ? song?.attributes?.artwork?.url.replace('{w}', '125').replace('{h}', '125') : song.images?.coverart} alt="Song coverart" />
+				</Link>
+
+				<div className="flex flex-1 flex-col">
+					{!artistId ? (
+						<>
+							<Link className="p-1 font-semibold truncate hover:text-my-yellow transition-all" to={`/songs/${song?.key}`}>{song.title}</Link>
+							<Link className="p-1 w-fit text-sm truncate hover:text-my-yellow transition-all" to={song.artists ? `/artists/${song?.artists[0]?.adamid}` : "/top-artists"}>{song.subtitle}</Link>
+						</>
+					) : (
+						<>
+							<p className="p-1 font-semibold truncate">{song?.attributes?.name}</p>
+							<p className="p-1 text-sm truncate">{song?.attributes?.albumName}</p>
+						</>
+					)}
+				</div>
+			</div>
+			{!artistId ? (
+				<PlayPause
+					song={song}
+					data={data}
+				/>
+			) : null
+			}
+		</div>
+	);
+}
 
 export default SongBar;
