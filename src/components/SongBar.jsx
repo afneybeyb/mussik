@@ -12,9 +12,13 @@ const SongBar = ({ song, data, i, artistId }) => {
 			<h3 className="font-bold">{i + 1}.</h3>
 
 			<div className="flex flex-1 flex-row justify-between items-center gap-3 cursor-default" to={`/songs/${song?.key}`}>
-				<Link to={`/songs/${song?.key}`}>
+				{!artistId ? (
+					<Link to={`/songs/${song?.key}`}>
+						<img className="w-[4em] h-fit rounded-lg" src={artistId ? song?.attributes?.artwork?.url.replace('{w}', '125').replace('{h}', '125') : song.images?.coverart} alt="Song coverart" />
+					</Link>
+				) : (
 					<img className="w-[4em] h-fit rounded-lg" src={artistId ? song?.attributes?.artwork?.url.replace('{w}', '125').replace('{h}', '125') : song.images?.coverart} alt="Song coverart" />
-				</Link>
+				)}
 
 				<div className="flex flex-1 flex-col">
 					{!artistId ? (
